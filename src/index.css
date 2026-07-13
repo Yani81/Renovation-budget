@@ -41,10 +41,9 @@
 
 * { box-sizing: border-box; margin: 0; }
 
-/* Скролът е само вътре в #root — така fixed елементите (долното меню,
-   лентата зад статус бара, FAB) не се местят при клавиатура/bounce на iOS */
-html, body { height: 100%; overflow: hidden; }
-#root { height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+/* Като при MyCar: скрол на документа, без bounce който мести fixed елементите */
+html, body { overscroll-behavior-y: none; }
+#root { min-height: 100dvh; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -67,7 +66,7 @@ body::before {
 .app {
   max-width: 560px;
   margin: 0 auto;
-  min-height: 100%;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   padding-top: var(--safe-top);
