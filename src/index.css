@@ -91,6 +91,8 @@ h2 { font-size: 1.05rem; font-weight: 600; }
   opacity: 0.35;
   pointer-events: none;
 }
+/* На тъмна тема мрежата е твърде контрастна — правим я едва доловима */
+[data-theme='dark'] .hero-remaining::before { opacity: 0.12; }
 .hero-remaining .label {
   font-size: 0.8rem; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--ink-soft);
