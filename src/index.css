@@ -41,7 +41,10 @@
 
 * { box-sizing: border-box; margin: 0; }
 
-html, body, #root { height: 100%; }
+/* Скролът е само вътре в #root — така fixed елементите (долното меню,
+   лентата зад статус бара, FAB) не се местят при клавиатура/bounce на iOS */
+html, body { height: 100%; overflow: hidden; }
+#root { height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -175,7 +178,7 @@ label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin: 10px
   backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
   padding-bottom: var(--safe-bottom);
-  z-index: 30;
+  z-index: 40;
 }
 .tabbar a {
   flex: 1; text-align: center; padding: 10px 0 8px;
