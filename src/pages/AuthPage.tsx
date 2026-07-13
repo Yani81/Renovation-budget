@@ -21,7 +21,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="page" style={{ maxWidth: 420, margin: '0 auto', paddingTop: 60 }}>
+    <div className="page" style={{ maxWidth: 420, margin: '0 auto', paddingTop: 'calc(60px + var(--safe-top))' }}>
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
         <div style={{ fontSize: '2.5rem' }}>🏗️</div>
         <h1>Ремонт Бюджет</h1>

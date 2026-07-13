@@ -21,6 +21,7 @@
   --radius: 14px;
   --shadow: 0 1px 3px rgba(23, 35, 58, 0.08);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
 }
 
 [data-theme='dark'] {
@@ -50,12 +51,23 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Лента зад системния статус бар (iOS standalone) — белият час се чете
+   върху blueprint синьото и в двете теми */
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--safe-top);
+  background: #1c3f8f;
+  z-index: 60;
+}
+
 .app {
   max-width: 560px;
   margin: 0 auto;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: var(--safe-top);
   padding-bottom: calc(72px + var(--safe-bottom));
 }
 
@@ -157,9 +169,13 @@ label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin: 10px
   position: fixed; bottom: 0; left: 0; right: 0;
   max-width: 560px; margin: 0 auto;
   display: flex;
-  background: var(--surface);
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
   padding-bottom: var(--safe-bottom);
+  z-index: 30;
 }
 .tabbar a {
   flex: 1; text-align: center; padding: 10px 0 8px;
