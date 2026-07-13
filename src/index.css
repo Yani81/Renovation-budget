@@ -176,11 +176,12 @@ label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin: 10px
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-top: 1px solid var(--line);
-  padding-bottom: var(--safe-bottom);
+  /* по-ниско от стандартния safe отстъп — менюто ляга близо до ръба */
+  padding-bottom: max(0px, calc(var(--safe-bottom) - 12px));
   z-index: 40;
 }
 .tabbar a {
-  flex: 1; text-align: center; padding: 10px 0 8px;
+  flex: 1; text-align: center; padding: 8px 0 6px;
   text-decoration: none; color: var(--ink-soft);
   font-size: 0.7rem;
 }
