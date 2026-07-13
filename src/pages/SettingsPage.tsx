@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useStore } from '../store/useStore';
+import CategoryIcon from '../components/CategoryIcon';
 
 const COLORS = ['#b45309', '#1c3f8f', '#0e7490', '#ca8a04', '#7c3aed', '#475569', '#15803d', '#be185d'];
 
@@ -38,7 +39,7 @@ export default function SettingsPage() {
           <div key={c.id} className="list-item">
             <div className="row">
               <span style={{ width: 12, height: 12, borderRadius: 3, background: c.color, display: 'inline-block' }} />
-              {c.icon} {c.name}
+              <CategoryIcon icon={c.icon} /> {c.name}
             </div>
             <button className="btn-ghost btn-sm" onClick={() => {
               if (confirm(`Изтриване на "${c.name}"? Разходите ѝ остават без категория.`))

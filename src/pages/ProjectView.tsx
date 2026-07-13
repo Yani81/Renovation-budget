@@ -8,6 +8,7 @@ import { useStore } from '../store/useStore';
 import { fmtEUR, fmtDate, periodRange } from '../lib/format';
 import type { Expense, PeriodFilter } from '../types';
 import ExpenseForm from '../components/ExpenseForm';
+import CategoryIcon from '../components/CategoryIcon';
 import ProjectForm from '../components/ProjectForm';
 import PeriodPicker from '../components/PeriodPicker';
 
@@ -164,7 +165,7 @@ export default function ProjectView() {
               {store.categories.map((c) => (
                 <span key={c.id} className={`chip ${catFilter === c.id ? 'active' : ''}`}
                   onClick={() => setCatFilter(catFilter === c.id ? null : c.id)}>
-                  {c.icon} {c.name}
+                  <CategoryIcon icon={c.icon} /> {c.name}
                 </span>
               ))}
             </div>
@@ -183,7 +184,7 @@ export default function ProjectView() {
             <div key={e.id} className="list-item">
               <div style={{ flex: 1 }} onClick={() => { setEditing(e); setShowExpense(true); }}>
                 <div>
-                  {catById[e.category_id ?? '']?.icon ?? '📦'}{' '}
+                  <CategoryIcon icon={catById[e.category_id ?? '']?.icon ?? '📦'} />{' '}
                   {e.description || catById[e.category_id ?? '']?.name || 'Разход'}
                 </div>
                 <div className="muted">
@@ -298,7 +299,7 @@ function PlanTab({ projectId }: { projectId: string }) {
         return (
           <div key={c.id} style={{ padding: '10px 0', borderBottom: '1px solid var(--line)' }}>
             <div className="row between">
-              <span>{c.icon} {c.name}</span>
+              <span><CategoryIcon icon={c.icon} /> {c.name}</span>
               <input
                 inputMode="decimal"
                 style={{ width: 110, padding: '7px 9px', textAlign: 'right' }}

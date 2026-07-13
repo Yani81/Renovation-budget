@@ -56,6 +56,7 @@ const DEFAULT_CATEGORIES = [
   { name: 'Мебели', color: '#7c3aed', icon: '🛋️' },
   { name: 'Техника', color: '#475569', icon: '📺' },
   { name: 'Довършителни', color: '#15803d', icon: '🎨' },
+  { name: 'Комунални услуги', color: '#ea580c', icon: 'svg:utilities' },
   { name: 'Други', color: '#64748b', icon: '📦' },
 ];
 
@@ -100,6 +101,21 @@ export const useStore = create<State>()(
           const rows = DEFAULT_CATEGORIES.map((c) => ({ ...c, user_id: uid }));
           const { data } = await supabase.from('categories').insert(rows).select();
           if (data) set({ categories: data as Category[] });
+        } else if (
+          // Еднократно (на устройство) допълване за акаунти отпреди тази категория
+          !localStorage.getItem('remont-seed-utilities') &&
+          !(cat.data as Category[]).some((c) => c.name === 'Комунални услуги')
+        ) {
+          const util = DEFAULT_CATEGORIES.find((c) => c.name === 'Комунални услуги')!;
+          const { data } = await supabase
+            .from('categories').insert({ ...util, user_id: uid }).select().single();
+          if (data)
+            set({
+              categories: [...get().categories, data as Category].sort((a, b) =>
+                a.name.localeCompare(b.name)
+              ),
+            });
+          localStorage.setItem('remont-seed-utilities', '1');
         }
       },
 

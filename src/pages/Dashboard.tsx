@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useStore, totals, projectSpent } from '../store/useStore';
 import { fmtEUR, fmtDate } from '../lib/format';
 import BudgetEntryForm from '../components/BudgetEntryForm';
+import CategoryIcon from '../components/CategoryIcon';
 
 export default function Dashboard() {
   const store = useStore();
@@ -63,7 +64,7 @@ export default function Dashboard() {
             <div key={e.id} className="list-item">
               <div>
                 <div>
-                  {catById[e.category_id ?? '']?.icon ?? '📦'}{' '}
+                  <CategoryIcon icon={catById[e.category_id ?? '']?.icon ?? '📦'} />{' '}
                   {e.description || catById[e.category_id ?? '']?.name || 'Разход'}
                 </div>
                 <div className="muted">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useStore } from '../store/useStore';
 import { today } from '../lib/format';
 import Modal from './Modal';
+import { iconText } from './CategoryIcon';
 import type { Expense } from '../types';
 
 export default function ExpenseForm({
@@ -41,7 +42,7 @@ export default function ExpenseForm({
       <label>Категория</label>
       <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
         {categories.map((c) => (
-          <option key={c.id} value={c.id}>{c.icon} {c.name}</option>
+          <option key={c.id} value={c.id}>{iconText(c.icon)} {c.name}</option>
         ))}
       </select>
       <label>Описание</label>
